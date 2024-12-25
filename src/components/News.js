@@ -13,7 +13,7 @@ export class News extends Component {
   }
 
   async componentDidMount() {
-    let url = `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=e6ebfd796ed14871a7d45fc3e85d68e5&page=1&pageSize=${this.props.pageSize}`
+    let url = `${this.props.url}q=elections&language=${this.props.selectedLanguage}&sortBy=${this.props.sortBy}&${this.props.apiKey}&page=1&pageSize=${this.props.pageSize}`
     this.setState({loading: true})
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -22,7 +22,7 @@ export class News extends Component {
   }
 
   handleNextClick = async()=> {
-    let url = `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=e6ebfd796ed14871a7d45fc3e85d68e5&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
+    let url = `${this.props.url}q=elections&language=${this.props.selectedLanguage}&sortBy=${this.props.sortBy}&${this.props.apiKey}&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
     this.setState({loading: true})
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -32,7 +32,7 @@ export class News extends Component {
   }
 
   handlePreviousClick = async()=> {
-    let url = `https://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=e6ebfd796ed14871a7d45fc3e85d68e5&page=${this.state.page-1}&pageSize=${this.props.pageSize}`
+    let url = `${this.props.url}q=elections&language=${this.props.selectedLanguage}&sortBy=${this.props.sortBy}&${this.props.apiKey}&page=${this.state.page-1}&pageSize=${this.props.pageSize}`
     this.setState({loading: true})
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -47,7 +47,7 @@ export class News extends Component {
         <h2 className='text-center'>Top Headlines</h2>
         {this.state.loading && <Spinner/>}
         <div className="row">
-          {!this.state.loading && this.state.articles.map((element) => {
+          {!this.state.loading && this.state.articles && this.state.articles.filter((element) => element.title !== "[Removed]").map((element) => {
             return (
               <div className="col-md-4" key={element.url}>
                 <NewsItem 

@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 
 export class Navbar extends Component {
+  handleLanguageChange = (lang) => {
+    this.props.onOptionChange('selectedLanguage', lang);
+  };
+
+  handleSortChange = (sortBy) => {
+    this.props.onOptionChange('sortBy', sortBy);
+  };
+  
   render() {
     return (
       <div>
@@ -11,6 +19,31 @@ export class Navbar extends Component {
                 <span className="navbar-toggler-icon"></span>
                 </button>
             </div>
+            <li className="nav-item dropdown mx-3">
+              <a className="nav-link dropdown-toggle text-white" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Language
+              </a>
+              <ul className="dropdown-menu">
+                {['ar', 'de', 'en', 'es', 'fr', 'he', 'it', 'nl', 'no', 'pt', 'ru', 'sv', 'ud', 'zh'].map((lang) => (
+                  <li key={lang}>
+                    <a className="dropdown-item" href="/" onClick={() => this.handleLanguageChange(lang)}>{lang}</a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+            <li className="nav-item dropdown mx-3">
+            <a className="nav-link dropdown-toggle text-white" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Sort By
+            </a>
+            <ul className="dropdown-menu">
+              {['Popularity', 'PublishedAt'].map((sort) => (
+                <li key={sort}>
+                  <a className="dropdown-item" href="/" onClick={() => this.handleSortChange(sort)}>{sort}</a>
+                </li>
+              ))}
+            </ul>
+          </li>
+            <li className="mx-5"></li>
         </nav>
       </div>
     )
