@@ -26,7 +26,7 @@ export class Navbar extends Component {
               <ul className="dropdown-menu">
                 {['ar', 'de', 'en', 'es', 'fr', 'he', 'it', 'nl', 'no', 'pt', 'ru', 'sv', 'ud', 'zh'].map((lang) => (
                   <li key={lang}>
-                    <a className="dropdown-item" href="/" onClick={() => this.handleLanguageChange(lang)}>{lang}</a>
+                    <div className="dropdown-item" onClick={() => this.handleLanguageChange(lang)}>{lang}</div>
                   </li>
                 ))}
               </ul>
@@ -38,7 +38,7 @@ export class Navbar extends Component {
             <ul className="dropdown-menu">
               {['Popularity', 'PublishedAt'].map((sort) => (
                 <li key={sort}>
-                  <a className="dropdown-item" href="/" onClick={() => this.handleSortChange(sort)}>{sort}</a>
+                  <div className="dropdown-item" onClick={() => this.handleSortChange(sort)}>{sort}</div>
                 </li>
               ))}
             </ul>
