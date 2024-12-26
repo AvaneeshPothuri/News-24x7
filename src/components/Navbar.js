@@ -1,12 +1,25 @@
-import React, { Component } from 'react'
+import React, { Component} from 'react'
 
 export class Navbar extends Component {
+  
   handleLanguageChange = (lang) => {
     this.props.onOptionChange('selectedLanguage', lang);
   };
 
   handleSortChange = (sortBy) => {
     this.props.onOptionChange('sortBy', sortBy);
+  };
+
+  handleOnChange = (event)=>{
+    this.props.textChange(event.target.value);
+  };
+
+  handleOnClick = ()=>{
+    this.props.onSearch();
+  }
+
+  handleFormSubmit = (event) => {
+    event.preventDefault();
   };
   
   render() {
@@ -15,10 +28,11 @@ export class Navbar extends Component {
         <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div className="container-fluid">
                 <a className="navbar-brand" href="/">News 24x7</a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span>
-                </button>
             </div>
+            <form className="d-flex w-100 justify-content-center align-items-center" role="search" onSubmit={this.handleFormSubmit}>
+              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={this.props.text} onChange={this.handleOnChange}></input>
+              <button className="btn btn-outline-light" type="submit" onClick={this.handleOnClick}>Search</button>
+            </form>
             <li className="nav-item dropdown mx-3">
               <a className="nav-link dropdown-toggle text-white" href="/" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Select Language

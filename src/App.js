@@ -7,20 +7,35 @@ export default class App extends Component {
   state ={
     selectedLanguage: 'en',
     sortBy: 'Popularity',
-    showNews: true
+    showNews: true,
+    text: '',
+    search: 'elections'
   };
 
   onOptionChange = (key, value) => {
     this.setState({ [key]: value, showNews: false }, () => {
       this.setState({ showNews: true });
     });
-  };  
+  };
+  
+  textChange = (value) => {
+    this.setState({text : value})
+  }
+
+  onSearch = () => {
+    console.log("Received value command");
+    this.setState({ search: this.state.text, showNews: false }, () => {
+      console.log("Searched for:", this.state.search);
+      this.setState({ showNews: true });
+    });
+  };
+  
   
   render() {
     return (
       <div>
-        <Navbar onOptionChange={this.onOptionChange} />
-        {this.state.showNews && <News pageSize={6} url="https://newsapi.org/v2/everything?" apiKey="apiKey=e6ebfd796ed14871a7d45fc3e85d68e5" selectedLanguage={this.state.selectedLanguage} sortBy={this.state.sortBy}/>}
+        <Navbar onOptionChange={this.onOptionChange} textChange={this.textChange} onSearch={this.onSearch}/>
+        {this.state.showNews && <News pageSize={6} url="https://newsapi.org/v2/everything?" search={this.state.search} apiKey="apiKey=e6ebfd796ed14871a7d45fc3e85d68e5" selectedLanguage={this.state.selectedLanguage} sortBy={this.state.sortBy}/>}
       </div>
     );
   }
