@@ -30,7 +30,7 @@ export class Navbar extends Component {
                 <a className="navbar-brand" href="/">News 24x7</a>
             </div>
             <form className="d-flex w-100 justify-content-center align-items-center" role="search" onSubmit={this.handleFormSubmit}>
-              <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" value={this.props.text} onChange={this.handleOnChange}></input>
+              <input className="form-control me-2 mx-2" type="search" placeholder="Search" aria-label="Search" value={this.props.text} onChange={this.handleOnChange}></input>
               <button className="btn btn-outline-light" type="submit" onClick={this.handleOnClick}>Search</button>
             </form>
             <li className="nav-item dropdown mx-3">
@@ -50,7 +50,7 @@ export class Navbar extends Component {
               Sort By
             </a>
             <ul className="dropdown-menu">
-              {['Popularity', 'PublishedAt'].map((sort) => (
+              {['Popularity', 'PublishedAt' , 'Relevancy'].map((sort) => (
                 <li key={sort}>
                   <div className="dropdown-item" onClick={() => this.handleSortChange(sort)}>{sort}</div>
                 </li>

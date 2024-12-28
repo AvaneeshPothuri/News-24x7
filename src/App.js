@@ -9,7 +9,8 @@ export default class App extends Component {
     sortBy: 'Popularity',
     showNews: true,
     text: '',
-    search: 'elections'
+    search: 'elections',
+    apiKey: process.env.REACT_APP_NEWS_API
   };
 
   onOptionChange = (key, value) => {
@@ -35,7 +36,7 @@ export default class App extends Component {
     return (
       <div>
         <Navbar onOptionChange={this.onOptionChange} textChange={this.textChange} onSearch={this.onSearch}/>
-        {this.state.showNews && <News pageSize={6} url="https://newsapi.org/v2/everything?" search={this.state.search} apiKey="apiKey=e6ebfd796ed14871a7d45fc3e85d68e5" selectedLanguage={this.state.selectedLanguage} sortBy={this.state.sortBy}/>}
+        {this.state.showNews && <News pageSize={6} url="https://newsapi.org/v2/everything?" search={this.state.search} apiKey={this.state.apiKey} selectedLanguage={this.state.selectedLanguage} sortBy={this.state.sortBy}/>}
       </div>
     );
   }

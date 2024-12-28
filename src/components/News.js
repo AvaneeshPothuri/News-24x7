@@ -13,7 +13,7 @@ export class News extends Component {
   }
 
   async componentDidMount() {
-    let url = `${this.props.url}q=${this.props.search}&language=${this.props.selectedLanguage}&sortBy=${this.props.sortBy}&${this.props.apiKey}&page=1&pageSize=${this.props.pageSize}`
+    let url = `${this.props.url}q=${this.props.search}&language=${this.props.selectedLanguage}&sortBy=${this.props.sortBy}&apiKey=${this.props.apiKey}&page=1&pageSize=${this.props.pageSize}`
     this.setState({loading: true})
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -22,7 +22,7 @@ export class News extends Component {
   }
 
   handleNextClick = async()=> {
-    let url = `${this.props.url}q=${this.props.search}&language=${this.props.selectedLanguage}&sortBy=${this.props.sortBy}&${this.props.apiKey}&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
+    let url = `${this.props.url}q=${this.props.search}&language=${this.props.selectedLanguage}&sortBy=${this.props.sortBy}&apiKey=${this.props.apiKey}&page=${this.state.page+1}&pageSize=${this.props.pageSize}`;
     this.setState({loading: true})
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -32,7 +32,7 @@ export class News extends Component {
   }
 
   handlePreviousClick = async()=> {
-    let url = `${this.props.url}q=${this.props.search}&language=${this.props.selectedLanguage}&sortBy=${this.props.sortBy}&${this.props.apiKey}&page=${this.state.page-1}&pageSize=${this.props.pageSize}`
+    let url = `${this.props.url}q=${this.props.search}&language=${this.props.selectedLanguage}&sortBy=${this.props.sortBy}&apiKey=${this.props.apiKey}&page=${this.state.page-1}&pageSize=${this.props.pageSize}`
     this.setState({loading: true})
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -54,7 +54,10 @@ export class News extends Component {
                   title={element.title ? element.title:""} 
                   description={element.description ? element.description:""} 
                   imageURL={element.urlToImage?element.urlToImage:""} 
-                  newsURL={element.url} 
+                  newsURL={element.url}
+                  author={element.author? element.author : "Unknown"}
+                  date={element.publishedAt}
+                  source={element.source.name}
                 />
               </div>
             );
